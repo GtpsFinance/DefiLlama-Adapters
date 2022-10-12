@@ -17,10 +17,12 @@ const chains = {
     fantom: 250,
     arbitrum: 42161,
     optimism: 10,
-    avalanche: 43114,
+    avax: 43114,
     xdai: 100,
     metis: 1088,
     celo: 42220,
+    kcc: 321,
+    cube: 1818
 }
 
 module.exports = {

@@ -1,4 +1,3 @@
-const { getBlock } = require("../helper/getBlock");
 const { chainExports } = require("../helper/exports");
 const { sumTokens } = require("../helper/unwrapLPs");
 const { getFixBalances } = require('../helper/portedTokens')
@@ -532,8 +531,7 @@ const liquidityBridgeTokens = [
 ];
 
 function chainTvl(chain) {
-  return async (time, _, chainBlocks) => {
-    const block = await getBlock(time, chain, chainBlocks, true);
+  return async (time, _, {[chain]: block}) => {
     const toa = []
     liquidityBridgeTokens.forEach(token => {
       if (!token[chain])
@@ -559,3 +557,6 @@ Object.keys(liquidityBridgeContractsV2).forEach(chain => chains.add(chain))
 module.exports = chainExports(chainTvl, Array.from(chains));
 module.exports.methodology = `Tokens bridged via cBridge are counted as TVL`;
 module.exports.misrepresentedTokens = true;
+module.exports.hallmarks = [
+  [1651881600, "UST depeg"],
+];
